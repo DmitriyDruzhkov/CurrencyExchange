@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class ExchangeController {
+public class ExchangeController { //вынести ("/exchange") в requestMapping
     private final ExchangeService exchangeService;
 
     public ExchangeController(ExchangeService exchangeService) {
@@ -24,7 +24,7 @@ public class ExchangeController {
         } catch (IllegalOperationException e) {
             return ResponseEntity.status(500).body(e.getMessage());
         } catch (Exception e) {
-            return ResponseEntity.status(400).build();
+            return ResponseEntity.status(400).build(); // для не обрабатываемых ошибок вызвращаем 500
         }
     }
 }

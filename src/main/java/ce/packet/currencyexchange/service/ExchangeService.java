@@ -45,15 +45,15 @@ public class ExchangeService {
         );
     }
 
-    private ExchangeDto tryCalculateByUSD(String from, String to, double amount) {
+    private ExchangeDto tryCalculateByUSD(String from, String to, double amount) { // добавить варианты USD/from и from/USD (для to тоже)
         var maybeExchangeRateUSDfrom = exchangeRatesRepository.findByBaseCurrencyCodeAndTargetCurrencyCode(
                 "USD", from);
         var maybeExchangeRateUSDto = exchangeRatesRepository.findByBaseCurrencyCodeAndTargetCurrencyCode(
                 "USD", to);
-        if (amount <= 0) throw new IllegalOperationException("error.currency.not.found", "Неверное количество средств");
+        if (amount <= 0) throw new IllegalOperationException("error.currency.not.found", "Неверное количество средств"); // не писать if в одну строку; проверку вынести перед запросов в бд
         if (maybeExchangeRateUSDfrom.isPresent() && maybeExchangeRateUSDto.isPresent()) {
             double newRate = maybeExchangeRateUSDfrom.get().getRate() / maybeExchangeRateUSDto.get().getRate();
-            return new ExchangeDto(maybeExchangeRateUSDfrom.get().getBaseCurrency(),
+            return new ExchangeDto(maybeExchangeRateUSDfrom.get().getBaseCurrency(), // поправить форматирование
                     maybeExchangeRateUSDto.get().getTargetCurrency(),
                     newRate,
                     amount,

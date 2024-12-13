@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-public class CurrencyController {
+public class CurrencyController { //вынести ("/currencies") в requestMapping
     private final CurrencyService currencyService;
 
     public CurrencyController(CurrencyService currencyService) {
@@ -38,7 +38,7 @@ public class CurrencyController {
     @GetMapping("/currencies")
     public ResponseEntity<?> getAllCurrencies() {
         try {
-            return ResponseEntity.ok(currencyService.findAll());
+            return ResponseEntity.ok(currencyService.findAll()); // возвращать сообщение что не нашли
         } catch (Exception e) {
             return ResponseEntity.status(500).build();
         }
@@ -54,7 +54,7 @@ public class CurrencyController {
             if (maybeCurrency.isPresent()) {
                 return ResponseEntity.ok(maybeCurrency.get());
             } else {
-                return ResponseEntity.status(404).build();
+                return ResponseEntity.status(404).build(); // возвращать сообщение что не нашли
             }
         } catch (Exception e) {
             return ResponseEntity.status(500).build();

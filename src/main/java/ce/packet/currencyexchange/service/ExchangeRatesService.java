@@ -55,8 +55,10 @@ public class ExchangeRatesService {
         mayBeExchangeRates.ifPresentOrElse(
                 exchangeRate -> exchangeRate.setRate(exchangeRateChangeDto.getRate()),
                 () -> {
-                    throw new IllegalOperationException("error.exchange.rate.not.found",
-                            "По переданным кодам валютная пара не найдена");
+                    throw new IllegalOperationException(
+                            "error.exchange.rate.not.found",
+                            "По переданным кодам валютная пара не найдена"
+                    );
                 }
         );
         exchangeRatesRepository.flush();

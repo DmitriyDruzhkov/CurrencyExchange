@@ -15,8 +15,8 @@ public class CurrencyService {
     private final CurrencyRepository currencyRepository;
     private final CurrencyValidator currencyValidator;
 
-    @Autowired
-    public CurrencyService(CurrencyRepository currencyRepository, CurrencyValidator currencyValidator) {
+    @Autowired // лишняя аннотация
+    public CurrencyService(CurrencyRepository currencyRepository, CurrencyValidator currencyValidator) {//форматирование
         this.currencyRepository = currencyRepository;
         this.currencyValidator = currencyValidator;
     }
